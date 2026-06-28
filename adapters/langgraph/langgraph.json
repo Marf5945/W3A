@@ -1,22 +1,22 @@
 {
-  "name": "w3a-builder-assistant",
+  "name": "wa3-builder-assistant",
   "version": "0.3.0-draft",
-  "description": "Example LangGraph assistant integration for guided W3A draft building.",
-  "entrypoint": "w3a_builder_graph.py",
+  "description": "Example LangGraph assistant integration for guided WA3 draft building.",
+  "entrypoint": "wa3_builder_graph.py",
   "config_schema": {
     "type": "object",
     "properties": {
-      "w3a_package_root": {
+      "wa3_package_root": {
         "type": "string",
-        "description": "Path to the W3A_SPEC package root."
+        "description": "Path to the WA3_SPEC package root."
       }
     },
-    "required": ["w3a_package_root"]
+    "required": ["wa3_package_root"]
   },
   "capabilities": [
     "collect_guided_answers",
-    "call_w3a_build",
-    "call_w3a_trust",
+    "call_wa3_build",
+    "call_wa3_trust",
     "report_gate_failures"
   ]
 }

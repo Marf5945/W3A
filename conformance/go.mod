@@ -1,4 +1,4 @@
-module w3a/conformance
+module wa3/conformance
 
 go 1.21
 

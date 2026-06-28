@@ -1,19 +1,19 @@
-# W3A Design Template: Terminal Tactical HUD
+# WA3 Design Template: Terminal Tactical HUD
 
-ㄊㄡ：W3A design-template v0.1
+ㄊㄡ：WA3 design-template v0.1
 ㄏㄠ：design.terminal.tactical_hud
 ㄉㄞ：1.0
-ㄏㄡ：design://local/w3a-preview
+ㄏㄡ：design://local/wa3-preview
 ㄈㄢ：reference-only
 
 ㄝㄇㄜ：design_template
 ㄝㄕㄡ：terminal_tactical_hud
 ㄝㄌㄞ：【source】user-provided local terminal/HUD preview【extracted】2026-06-28
-ㄝㄉㄧ：Extracted from a tactical terminal/HUD style HTML preview. Display guidance only; not an operable W3A contract and not part of the operable W3A canonical/signature trust profile.
+ㄝㄉㄧ：Extracted from a tactical terminal/HUD style HTML preview. Display guidance only; not an operable WA3 contract and not part of the operable WA3 canonical/signature trust profile.
 
 ## Purpose
 
-Use this template when a W3A renderer needs a terminal-like tactical interface:
+Use this template when a WA3 renderer needs a terminal-like tactical interface:
 sticky HUD navigation, square-corner panels, mono status labels, grid overlays,
 purple-accent focus states, data telemetry panels, secure-download style cards,
 forms in command-console modals, and compact toast/status feedback.
@@ -24,9 +24,9 @@ forms in command-console modals, and compact toast/status feedback.
   references, or script snippets.
 - Do not load assets because of this template; it is only a visual reference.
 - Treat all terminal labels such as "secure", "encrypted", "decrypt", "live",
-  and "system notice" as visual tone only. They do not affect W3A trust state.
-- All buttons and row actions must still map to declared W3A action ids.
-- Mutating actions still require `w3a-core` confirmation when the verified
+  and "system notice" as visual tone only. They do not affect WA3 trust state.
+- All buttons and row actions must still map to declared WA3 action ids.
+- Mutating actions still require `wa3-core` confirmation when the verified
   contract requires it.
 
 ## Layout Profile
@@ -127,7 +127,7 @@ forms in command-console modals, and compact toast/status feedback.
   "hud_nav": {
     "shape": "sticky top bar with dark translucent surface, bottom border, identity cell left, route buttons center, actions right",
     "route_button": "mono bracket label such as [ 01 / SECTION ], active state uses accent border and accent text",
-    "notes": "route buttons are display navigation only; W3A action execution still uses verified action ids"
+    "notes": "route buttons are display navigation only; WA3 action execution still uses verified action ids"
   },
   "identity_cell": {
     "shape": "small square icon frame with bracket corners",
@@ -184,7 +184,7 @@ forms in command-console modals, and compact toast/status feedback.
   },
   "action_role_slots": {
     "primary_submit": {
-      "match": "verified W3A action that submits a command modal, starts the main operation, or confirms a prepared flow",
+      "match": "verified WA3 action that submits a command modal, starts the main operation, or confirms a prepared flow",
       "component": "command_modal primary button or HUD action button",
       "style": "square accent-bordered button with mono uppercase label, accent text, and faint purple glow",
       "fallback": "derive a same-style square primary command button from accent and surface tokens; do not create a feature"
@@ -208,13 +208,13 @@ forms in command-console modals, and compact toast/status feedback.
       "match": "verified destructive, irreversible, or high-risk mutating action that already requires confirmation",
       "component": "command_modal destructive confirmation button",
       "style": "square warning/danger button using accent glow sparingly, paired with a visible target summary",
-      "notes": "visual treatment only; confirmation and target still come from w3a-core"
+      "notes": "visual treatment only; confirmation and target still come from wa3-core"
     }
   }
 }
 ```
 
-## W3A Block Mapping
+## WA3 Block Mapping
 
 ```json
 {
@@ -235,7 +235,7 @@ forms in command-console modals, and compact toast/status feedback.
   small numeric/status chips.
 - Keep hover/focus visible through border and text changes, not color alone.
 - When a design says "secure", "decrypt", or "encrypted", map the real state to
-  the W3A trust enum or runtime progress. Never invent security status visually.
+  the WA3 trust enum or runtime progress. Never invent security status visually.
 - Use local/runtime-provided icons where possible. If no icon library exists,
   use text initials or simple CSS shapes instead of loading a remote pack.
 - Animations such as pulse, sweep, and scanline must be optional and respect

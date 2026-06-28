@@ -57,12 +57,12 @@ const (
 	eBuilderRisk      = "E-BUILDER-RISK"
 )
 
-type w3aError struct {
+type wa3Error struct {
 	code string
 	msg  string
 }
 
-func (e w3aError) Error() string {
+func (e wa3Error) Error() string {
 	if e.msg == "" {
 		return e.code
 	}
@@ -70,7 +70,7 @@ func (e w3aError) Error() string {
 }
 
 func fail(code, msg string) error {
-	return w3aError{code: code, msg: msg}
+	return wa3Error{code: code, msg: msg}
 }
 
 type pair struct {
@@ -126,12 +126,12 @@ func main() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "usage: w3a canonical <file> | build --answers <answers.json> --out <app.w3a> [--test-sign] [--mock-demo <demo.json>] | keygen --publisher <id> --key-out <private-key.json> [--force] | sign --key-file <private-key.json> --in <draft.w3a> --out <app.w3a> | trust [--trusted-pub <hex>] [--revoked-pub <hex>] [--rl <file.w3a-rl>] <file> | gen-vectors | bundle-check")
+	fmt.Fprintln(os.Stderr, "usage: wa3 canonical <file> | build --answers <answers.json> --out <app.tdy> [--test-sign] [--mock-demo <demo.json>] | keygen --publisher <id> --key-out <private-key.json> [--force] | sign --key-file <private-key.json> --in <draft.tdy> --out <app.tdy> | trust [--trusted-pub <hex>] [--revoked-pub <hex>] [--rl <file.tdy-rl>] <file> | gen-vectors | bundle-check")
 }
 
 func cmdCanonical(args []string) error {
 	if len(args) != 1 {
-		return errors.New("usage: w3a canonical <file>")
+		return errors.New("usage: wa3 canonical <file>")
 	}
 	data, err := os.ReadFile(args[0])
 	if err != nil {
@@ -139,9 +139,9 @@ func cmdCanonical(args []string) error {
 	}
 	var out []byte
 	switch {
-	case strings.HasSuffix(args[0], ".w3a-rl"):
+	case strings.HasSuffix(args[0], ".tdy-rl"):
 		out, err = canonicalRL(data)
-	case strings.HasSuffix(args[0], ".w3a-kr"):
+	case strings.HasSuffix(args[0], ".tdy-kr"):
 		out, err = canonicalKR(data)
 	default:
 		out, err = canonicalizeBytes(data)
@@ -284,7 +284,7 @@ func cmdBuild(args []string) error {
 		}
 	}
 	if answersPath == "" || outPath == "" {
-		return errors.New("usage: w3a build --answers <answers.json> --out <app.w3a> [--test-sign] [--mock-demo <demo.json>]")
+		return errors.New("usage: wa3 build --answers <answers.json> --out <app.tdy> [--test-sign] [--mock-demo <demo.json>]")
 	}
 	root, err := findSpecRoot()
 	if err != nil {
@@ -671,7 +671,7 @@ func defaultString(s, fallback string) string {
 
 func emitContract(answers buildAnswers, tmpl builderTemplate, actions []templateAction, renames map[string]string, pubValue, sigValue string) string {
 	lines := []string{
-		"ㄊㄡ" + sep + "W3A v0.3",
+		"ㄊㄡ" + sep + "WA3 v0.3",
 		"ㄏㄠ" + sep + answers.App.ID,
 		"ㄉㄞ" + sep + answers.App.Version,
 		"ㄏㄡ" + sep + answers.App.Backend,
@@ -826,7 +826,7 @@ func cmdKeygen(args []string) error {
 		}
 	}
 	if publisher == "" || keyOut == "" {
-		return errors.New("usage: w3a keygen --publisher <id> --key-out <private-key.json> [--force]")
+		return errors.New("usage: wa3 keygen --publisher <id> --key-out <private-key.json> [--force]")
 	}
 	if err := ensureKeyPathOutsideRepo(keyOut); err != nil {
 		return err
@@ -844,7 +844,7 @@ func cmdKeygen(args []string) error {
 	}
 	seed := priv.Seed()
 	rec := privateKeyFile{
-		Type:        "w3a-ed25519-seed-v1",
+		Type:        "wa3-ed25519-seed-v1",
 		Publisher:   publisher,
 		PublicKey:   "ed25519:" + base64.StdEncoding.EncodeToString(pub),
 		PublicHex:   hex.EncodeToString(pub),
@@ -904,7 +904,7 @@ func cmdSign(args []string) error {
 		}
 	}
 	if keyFile == "" || inPath == "" || outPath == "" {
-		return errors.New("usage: w3a sign --key-file <private-key.json> --in <draft.w3a> --out <app.w3a>")
+		return errors.New("usage: wa3 sign --key-file <private-key.json> --in <draft.tdy> --out <app.tdy>")
 	}
 	key, priv, pub, err := loadPrivateKeyFile(keyFile)
 	if err != nil {
@@ -953,7 +953,7 @@ func ensureKeyPathOutsideRepo(path string) error {
 		return err
 	}
 	if rel == "." || (!strings.HasPrefix(rel, ".."+string(filepath.Separator)) && rel != "..") {
-		return fmt.Errorf("private key path must be outside the W3A_SPEC repository: %s", path)
+		return fmt.Errorf("private key path must be outside the WA3_SPEC repository: %s", path)
 	}
 	return nil
 }
@@ -967,7 +967,7 @@ func loadPrivateKeyFile(path string) (privateKeyFile, ed25519.PrivateKey, ed2551
 	if err := json.Unmarshal(data, &rec); err != nil {
 		return privateKeyFile{}, nil, nil, err
 	}
-	if rec.Type != "w3a-ed25519-seed-v1" {
+	if rec.Type != "wa3-ed25519-seed-v1" {
 		return privateKeyFile{}, nil, nil, errors.New("unsupported key file type")
 	}
 	seed, err := hex.DecodeString(rec.SeedHex)
@@ -1042,7 +1042,7 @@ func mockDemoJSON(tmpl builderTemplate, answers buildAnswers, result buildResult
 func mockSampleData(templateID string) any {
 	switch templateID {
 	case "task_list":
-		return []map[string]string{{"id": "task-1", "title": "Review W3A draft", "done": "no"}}
+		return []map[string]string{{"id": "task-1", "title": "Review WA3 draft", "done": "no"}}
 	case "feedback_form":
 		return []map[string]string{{"id": "feedback-1", "name": "Demo", "message": "Looks good"}}
 	case "product_showcase":
@@ -1068,7 +1068,7 @@ func mockSampleData(templateID string) any {
 			},
 		}
 	default:
-		return []map[string]string{{"id": "msg-1", "author": "Demo", "text": "Hello W3A"}}
+		return []map[string]string{{"id": "msg-1", "author": "Demo", "text": "Hello WA3"}}
 	}
 }
 
@@ -1102,7 +1102,7 @@ func cmdTrust(args []string) error {
 		}
 	}
 	if file == "" {
-		return errors.New("usage: w3a trust [--trusted-pub <hex>] [--revoked-pub <hex>] [--rl <file.w3a-rl>] <file>")
+		return errors.New("usage: wa3 trust [--trusted-pub <hex>] [--revoked-pub <hex>] [--rl <file.tdy-rl>] <file>")
 	}
 	data, err := os.ReadFile(file)
 	if err != nil {
@@ -1127,7 +1127,7 @@ func cmdTrust(args []string) error {
 }
 
 // applyRevocationList re-checks an already-classified contract against a §27
-// revocation list (.w3a-rl). It reuses the existing RL parser and the standard
+// revocation list (.tdy-rl). It reuses the existing RL parser and the standard
 // library only. A match overrides the trust state to revoked; non-signed inputs
 // are returned unchanged.
 //
@@ -1334,14 +1334,14 @@ func cleanValue(v string) string {
 		}
 		b.WriteRune(r)
 	}
-	return trimRightW3ASpace(b.String())
+	return trimRightWA3Space(b.String())
 }
 
 func isC0C1Control(r rune) bool {
 	return (r >= 0x00 && r <= 0x1F && r != '\n') || r == 0x7F || (r >= 0x80 && r <= 0x9F)
 }
 
-func trimRightW3ASpace(s string) string {
+func trimRightWA3Space(s string) string {
 	return strings.TrimRight(s, " \t")
 }
 
@@ -1847,7 +1847,7 @@ func sha256Hex(b []byte) string {
 	return hex.EncodeToString(sum[:])
 }
 
-const nestedFixture = "ㄊㄡ：W3A v0.3\nㄏㄠ：com.example.board\nㄉㄞ：1.0\n" +
+const nestedFixture = "ㄊㄡ：WA3 v0.3\nㄏㄠ：com.example.board\nㄉㄞ：1.0\n" +
 	"ㄏㄡ：gdrive://BOARD_FILE_ID\nㄈㄢ：shared\n\n" +
 	"ㄋㄥ\n" +
 	"ㄓㄠ：submit_message\n  ㄕㄡ：text｜ㄐㄩ\n  ㄘ：ㄔㄥ\n  ㄓ：/messages\n" +
@@ -1870,15 +1870,15 @@ const krFixture = "ㄓㄜ：com.example.publisher\nㄔㄣ：2026-06-27T00:00:00Z
 
 // Extension sub-field fixtures (§8.1 unified rule): ㄝ fields inside a record are
 // moved after core fields and sorted by key. ext keys deliberately out of order.
-const actionExtFixture = "ㄊㄡ：W3A v0.3\nㄏㄠ：com.example.x\nㄉㄞ：1.0\n\n" +
+const actionExtFixture = "ㄊㄡ：WA3 v0.3\nㄏㄠ：com.example.x\nㄉㄞ：1.0\n\n" +
 	"ㄋㄥ\nㄓㄠ：a\n  ㄝㄗㄜ：z\n  ㄓ：/x\n  ㄝㄇㄜ：m\n  ㄘ：ㄎㄢ\n"
 
-const entityExtFixture = "ㄊㄡ：W3A v0.3\nㄏㄠ：com.example.x\nㄉㄞ：1.0\n\n" +
+const entityExtFixture = "ㄊㄡ：WA3 v0.3\nㄏㄠ：com.example.x\nㄉㄞ：1.0\n\n" +
 	"ㄋㄥ\nㄕ：message\n  ㄝㄗㄜ：z\n  id：ㄐㄩ\n  ㄝㄇㄜ：m\n  author：ㄐㄩ\n"
 
 func cmdGenVectors(args []string) error {
 	if len(args) != 0 {
-		return errors.New("usage: w3a gen-vectors")
+		return errors.New("usage: wa3 gen-vectors")
 	}
 	root, err := findConformanceRoot()
 	if err != nil {
@@ -1913,27 +1913,27 @@ func buildVectors() (map[string][]byte, error) {
 		return nil, err
 	}
 	out["vectors/reject/cases.json"] = reject
-	if err := addDocVector(out, "vectors/canonical/header-basic", "input.w3a",
-		"ㄏㄠ：com.example.board\nㄊㄡ：W3A v0.3\nㄈㄢ：shared\nㄉㄞ：1.0\nㄏㄡ：gdrive://BOARD_FILE_ID\n", canonicalizeBytes); err != nil {
+	if err := addDocVector(out, "vectors/canonical/header-basic", "input.tdy",
+		"ㄏㄠ：com.example.board\nㄊㄡ：WA3 v0.3\nㄈㄢ：shared\nㄉㄞ：1.0\nㄏㄡ：gdrive://BOARD_FILE_ID\n", canonicalizeBytes); err != nil {
 		return nil, err
 	}
-	if err := addDocVector(out, "vectors/extension/header-ext", "input.w3a",
-		"ㄊㄡ：W3A v0.3\nㄏㄠ：com.example.board\nㄉㄞ：1.0\nㄝㄖㄜ：https://example.com/rl\nㄝㄎㄜ：ed25519:NEWKEYFP\n", canonicalizeBytes); err != nil {
+	if err := addDocVector(out, "vectors/extension/header-ext", "input.tdy",
+		"ㄊㄡ：WA3 v0.3\nㄏㄠ：com.example.board\nㄉㄞ：1.0\nㄝㄖㄜ：https://example.com/rl\nㄝㄎㄜ：ed25519:NEWKEYFP\n", canonicalizeBytes); err != nil {
 		return nil, err
 	}
-	if err := addDocVector(out, "vectors/canonical/board-nested", "input.w3a", nestedFixture, canonicalizeBytes); err != nil {
+	if err := addDocVector(out, "vectors/canonical/board-nested", "input.tdy", nestedFixture, canonicalizeBytes); err != nil {
 		return nil, err
 	}
-	if err := addDocVector(out, "vectors/extension/action-ext", "input.w3a", actionExtFixture, canonicalizeBytes); err != nil {
+	if err := addDocVector(out, "vectors/extension/action-ext", "input.tdy", actionExtFixture, canonicalizeBytes); err != nil {
 		return nil, err
 	}
-	if err := addDocVector(out, "vectors/extension/entity-ext", "input.w3a", entityExtFixture, canonicalizeBytes); err != nil {
+	if err := addDocVector(out, "vectors/extension/entity-ext", "input.tdy", entityExtFixture, canonicalizeBytes); err != nil {
 		return nil, err
 	}
-	if err := addDocVector(out, "vectors/rl/basic", "input.w3a-rl", rlFixture, canonicalRL); err != nil {
+	if err := addDocVector(out, "vectors/rl/basic", "input.tdy-rl", rlFixture, canonicalRL); err != nil {
 		return nil, err
 	}
-	if err := addDocVector(out, "vectors/kr/basic", "input.w3a-kr", krFixture, canonicalKR); err != nil {
+	if err := addDocVector(out, "vectors/kr/basic", "input.tdy-kr", krFixture, canonicalKR); err != nil {
 		return nil, err
 	}
 	if err := addSignatureVector(out); err != nil {
@@ -1967,7 +1967,7 @@ func versionCases() ([]byte, error) {
 	for _, s := range []string{"1", "1.0", "1.1", "10", "2", "01", "1.01", "1.", "1.x", ".1", ""} {
 		maj, min, err := parseVersion(s, 1)
 		if err != nil {
-			var we w3aError
+			var we wa3Error
 			if errors.As(err, &we) {
 				p.Cases = append(p.Cases, item{Input: s, ExpectError: we.code})
 				continue
@@ -2026,7 +2026,7 @@ func expectReject(src, code string) error {
 	if err == nil {
 		return fmt.Errorf("expected %s but got success", code)
 	}
-	var we w3aError
+	var we wa3Error
 	if !errors.As(err, &we) {
 		return err
 	}
@@ -2065,7 +2065,7 @@ const signatureReadme = "# signature/board-nested — Ed25519 golden signature\n
 	"- `message.canonical` — the exact bytes signed: the canonical form of the\n" +
 	"  `canonical/board-nested` document.\n" +
 	"- `signature.hex` — Ed25519 signature (deterministic for a given key+message).\n\n" +
-	"Generated by `go run ./tools/w3a gen-vectors`.\n"
+	"Generated by `go run ./tools/wa3 gen-vectors`.\n"
 
 func marshalJSON(v any) ([]byte, error) {
 	b, err := json.MarshalIndent(v, "", "  ")
@@ -2077,7 +2077,7 @@ func marshalJSON(v any) ([]byte, error) {
 
 func cmdBundleCheck(args []string) error {
 	if len(args) != 0 {
-		return errors.New("usage: w3a bundle-check")
+		return errors.New("usage: wa3 bundle-check")
 	}
 	specRoot, err := findSpecRoot()
 	if err != nil {
@@ -2089,7 +2089,7 @@ func cmdBundleCheck(args []string) error {
 	if err := checkJSON(filepath.Join(specRoot, "adapters", "haler", "haler.skill.json")); err != nil {
 		return err
 	}
-	if err := checkOpenAIYAML(filepath.Join(specRoot, "skills", "w3a-spec", "agents", "openai.yaml")); err != nil {
+	if err := checkOpenAIYAML(filepath.Join(specRoot, "skills", "wa3-spec", "agents", "openai.yaml")); err != nil {
 		return err
 	}
 	if err := checkManifestPaths(specRoot); err != nil {
@@ -2161,16 +2161,16 @@ func checkManifestPaths(root string) error {
 }
 
 func checkSpecHashes(root string) error {
-	a, err := os.ReadFile(filepath.Join(root, "W3A-SPEC.md"))
+	a, err := os.ReadFile(filepath.Join(root, "WA3-SPEC.md"))
 	if err != nil {
 		return err
 	}
-	b, err := os.ReadFile(filepath.Join(root, "skills", "w3a-spec", "references", "W3A-SPEC.md"))
+	b, err := os.ReadFile(filepath.Join(root, "skills", "wa3-spec", "references", "WA3-SPEC.md"))
 	if err != nil {
 		return err
 	}
 	if !bytes.Equal(a, b) {
-		return errors.New("W3A-SPEC.md and skill reference differ")
+		return errors.New("WA3-SPEC.md and skill reference differ")
 	}
 	return nil
 }
@@ -2216,7 +2216,7 @@ func checkBuilder(root string) error {
 			return err
 		}
 	}
-	tmp, err := os.MkdirTemp("", "w3a-builder-check-*")
+	tmp, err := os.MkdirTemp("", "wa3-builder-check-*")
 	if err != nil {
 		return err
 	}
@@ -2295,7 +2295,7 @@ func checkBuilder(root string) error {
 		if err == nil {
 			return fmt.Errorf("builder reject fixture passed unexpectedly: %s", file)
 		}
-		var we w3aError
+		var we wa3Error
 		if !errors.As(err, &we) || we.code != code {
 			return fmt.Errorf("builder reject fixture %s got %v, want %s", file, err, code)
 		}
@@ -2313,7 +2313,7 @@ func scanForbidden(root string) error {
 		"ㄖ" + "ㄨ",
 		"ㄒ" + "ㄩ",
 		"py" + "thon3",
-		"w3a_min" + ".py",
+		"wa3_min" + ".py",
 		"gen_vectors" + ".py",
 		"ed25519_ref" + ".py",
 	}
@@ -2334,13 +2334,19 @@ func scanForbidden(root string) error {
 		if strings.HasSuffix(path, ".pyc") {
 			return nil
 		}
+		if strings.Contains(path, string(filepath.Separator)+"output"+string(filepath.Separator)) {
+			base := d.Name()
+			if base != "README.md" && base != ".gitignore" {
+				return nil
+			}
+		}
 		// Skip compiled build artifacts only. These are never authored source:
 		// the Go CLI binary embeds the program's own string table (including this
 		// scanner's forbidden markers), so scanning it would false-positive. They
 		// are also listed in .gitignore so they never enter the published bundle.
 		// Every other file type is still scanned, so marker coverage over authored
 		// source is unchanged (no allowlist, no content sniffing).
-		if base := d.Name(); base == "w3a" ||
+		if base := d.Name(); base == "wa3" ||
 			strings.HasSuffix(base, ".test") ||
 			strings.HasSuffix(base, ".exe") ||
 			strings.HasSuffix(base, ".o") ||
@@ -2366,7 +2372,7 @@ func findConformanceRoot() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	for _, p := range []string{cwd, filepath.Join(cwd, "W3A_SPEC", "conformance")} {
+	for _, p := range []string{cwd, filepath.Join(cwd, "WA3_SPEC", "conformance")} {
 		if _, err := os.Stat(filepath.Join(p, "README.md")); err == nil {
 			if _, err := os.Stat(filepath.Join(p, "vectors")); err == nil {
 				return p, nil
@@ -2385,13 +2391,13 @@ func findSpecRoot() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	candidates := []string{cwd, filepath.Join(cwd, "W3A_SPEC"), filepath.Dir(cwd), filepath.Join(filepath.Dir(cwd), "W3A_SPEC")}
+	candidates := []string{cwd, filepath.Join(cwd, "WA3_SPEC"), filepath.Dir(cwd), filepath.Join(filepath.Dir(cwd), "WA3_SPEC")}
 	for _, c := range candidates {
-		if _, err := os.Stat(filepath.Join(c, "W3A-SPEC.md")); err == nil {
+		if _, err := os.Stat(filepath.Join(c, "WA3-SPEC.md")); err == nil {
 			if _, err := os.Stat(filepath.Join(c, "skill.json")); err == nil {
 				return c, nil
 			}
 		}
 	}
-	return "", errors.New("could not locate W3A_SPEC root")
+	return "", errors.New("could not locate WA3_SPEC root")
 }

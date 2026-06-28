@@ -1,8 +1,8 @@
 # output/
 
-Default destination for files produced by the W3A builder.
+Default destination for files produced by the WA3 builder.
 
-Everything an agent or the `w3a` CLI generates — draft contracts, test-signed
+Everything an agent or the `wa3` CLI generates — draft contracts, test-signed
 contracts, canonical hashes, and mock-provider demos — is written here so
 generated artifacts never get mixed into the spec, schema, templates, or vectors.
 
@@ -10,16 +10,16 @@ generated artifacts never get mixed into the spec, schema, templates, or vectors
 
 | Artifact | Path |
 | --- | --- |
-| Unsigned draft | `output/<name>.draft.w3a` |
-| Test-signed (opt-in) | `output/<name>.test-signed.w3a` |
+| Unsigned draft | `output/<name>.draft.tdy` |
+| Test-signed (opt-in) | `output/<name>.test-signed.tdy` |
 | Mock-provider demo | `output/<name>.mock-demo.json` |
 
 Example build (run from `conformance/`, requires a Go toolchain):
 
 ```sh
-go run ./tools/w3a build \
+go run ./tools/wa3 build \
   --answers ../builder/examples/board.answers.json \
-  --out ../output/board.draft.w3a \
+  --out ../output/board.draft.tdy \
   --mock-demo ../output/board.mock-demo.json
 ```
 

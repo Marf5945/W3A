@@ -2,19 +2,19 @@
 
 This document names the safe path for custom UI rendering. A design template is
 display guidance only; binding happens at render planning time, not through an
-identity field inside the `*_ds.w3a`.
+identity field inside the `*.dsdy`.
 
 ## Flow
 
-1. Verify the operable `.w3a`.
+1. Verify the operable `.tdy`.
 2. Compile an Agent Interface Plan. The plan contains blocks and action ids, but
    no secret, token, backend target, HTTP method, or provider credential.
-3. Ask the user whether to apply a `*_ds.w3a` design template. The three choices
+3. Ask the user whether to apply a `*.dsdy` design template. The three choices
    are: no template (neutral fallback renderer), the default template, or one of
    three recommended templates.
 4. Resolve the design choice:
    - No template: use the neutral fallback renderer (see "Neutral Default and
-     No-Template" below). Do not load any `*_ds.w3a`.
+     No-Template" below). Do not load any `*.dsdy`.
    - Default template: load the `selection_policy.default_handle` entry in
      `design_templates/catalog.json`.
    - Pick from recommendations: use the catalog to recommend the closest
@@ -28,7 +28,7 @@ identity field inside the `*_ds.w3a`.
    `action_id` plus plain input values.
 8. On every operation, core re-reads the verified contract, re-checks current
    `§27` revocation/key-rotation state (for example via
-   `w3a trust --rl <file.w3a-rl>` or the host's equivalent), and enforces target,
+   `wa3 trust --rl <file.tdy-rl>` or the host's equivalent), and enforces target,
    permission, mutating, confirmation, idempotency, and provider policy. A
    revoked key or version stops the operation before any provider call.
 
@@ -54,7 +54,7 @@ Renderers and host agents should check:
 ## Neutral Default and No-Template
 
 The "no template" choice must still produce a usable, safe UI without loading any
-`*_ds.w3a`. The neutral fallback renderer maps verified blocks to plain,
+`*.dsdy`. The neutral fallback renderer maps verified blocks to plain,
 unstyled component roles:
 
 - list (`ㄗㄞ`) → a plain vertical list of rows.
@@ -78,19 +78,19 @@ Do not confuse the two catalog files:
 - `builder/templates/catalog.json` is the **functional** template index for the
   guided builder. It may name operable `template_id`s and drives what gets built.
 - `design_templates/catalog.json` is the **display-only** recommendation index
-  for `*_ds.w3a` visual shells. It never names action ids, providers, backends,
+  for `*.dsdy` visual shells. It never names action ids, providers, backends,
   permissions, or trust state.
 
 Authoring picks a functional template; rendering picks a design template. They
 are selected at different stages and must never be merged.
 
-## Why There Is No App Binding Field in `_ds.w3a`
+## Why There Is No App Binding Field in `.dsdy`
 
 The design template is intentionally reusable. It does not say "I belong to this
 app" because that would make display guidance look like a trust statement. The
 real binding is:
 
-- operable `.w3a` verified by core,
+- operable `.tdy` verified by core,
 - Agent Interface Plan action ids and blocks,
 - catalog/template display roles,
 - runtime binding map created for this render session.

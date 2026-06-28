@@ -1,7 +1,7 @@
-# Webpage to W3A Contract Extraction
+# Webpage to WA3 Contract Extraction
 
 This document defines the v1 authoring path for turning a real webpage or web
-app into a W3A builder `answers.json` draft. The output is never trusted just
+app into a WA3 builder `answers.json` draft. The output is never trusted just
 because an agent extracted it.
 
 ## User Flow
@@ -17,7 +17,7 @@ because an agent extracted it.
 5. User chooses keep, remove, rename, or asks the agent to refine. The builder
    asks only for missing decisions that block a safe draft.
 6. User explicitly chooses "start building". Only then may the builder run the
-   deterministic gates and emit `.w3a`.
+   deterministic gates and emit `.tdy`.
 
 ## What to Extract
 
@@ -25,11 +25,11 @@ because an agent extracted it.
   numeric counters, tags, and status values.
 - Action candidates: read, submit, react/button, select/filter, search, and
   delete-like operations.
-- Input/output shape: field names and W3A primitive types only.
+- Input/output shape: field names and WA3 primitive types only.
 - Display blocks: list, detail, board, input, search, or text fallback.
 - Human-readable purpose and data impact for the Feature Manifest.
 - Design needs as display hints, not behavior: density, text size, preferred
-  layout, or possible `*_ds.w3a` tag matches.
+  layout, or possible `*.dsdy` tag matches.
 
 ## What Not to Extract
 
@@ -88,9 +88,9 @@ extraction:
 - Design template or simple default: handled by `docs/RENDER_PIPELINE.md`
   (default template, three recommendations, or the neutral fallback renderer).
 - User-provided visual reference: the user's own page/style becomes a new
-  `*_ds.w3a` via the design-template extraction rules in `W3A-SPEC.md` §4A and
+  `*.dsdy` via the design-template extraction rules in `WA3-SPEC.md` §4A and
   `design_templates/README.md`, then binds through `docs/RENDER_PIPELINE.md`.
   Extraction never pulls operable behavior from that reference.
 
-The user should not need to understand W3A tokens. The UI should show plain
-labels and keep the W3A structure behind the review screen.
+The user should not need to understand WA3 tokens. The UI should show plain
+labels and keep the WA3 structure behind the review screen.

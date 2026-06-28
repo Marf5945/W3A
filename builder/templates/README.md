@@ -1,14 +1,14 @@
-# W3A Functional Templates
+# WA3 Functional Templates
 
 This folder is the guided-builder functional template area. Templates here
 declare user-visible data shapes, actions, blocks, risk classes, and default
-preferences for safe `.w3a` authoring.
+preferences for safe `.tdy` authoring.
 
 Functional templates are operable builder inputs. They are different from
-`../../design_templates/*_ds.w3a`, which are display-only shape and visual
+`../../design_templates/*.dsdy`, which are display-only shape and visual
 references and must not define actions, providers, permissions, or trust.
 The optional `recommended_design_templates` field may list display-only
-`*_ds.w3a` candidates by handle/file/reason, but the agent must still ask before
+`*.dsdy` candidates by handle/file/reason, but the agent must still ask before
 applying one.
 
 ## Current Templates
@@ -28,7 +28,7 @@ When a user asks for a product introduction page, product landing page,
 solution showcase, brochure site, public product page, or launch page, suggest
 `product_showcase` as the closest functional template. Then ask which
 features to keep, remove, or rename, and separately ask whether to apply a
-display-only `*_ds.w3a` design template.
+display-only `*.dsdy` design template.
 
 When a user asks for an app-style product experience, mobile product app,
 bottom-tab product app, HMI app, field-engineer product app, or product

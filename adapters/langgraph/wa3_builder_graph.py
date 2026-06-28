@@ -1,7 +1,7 @@
-"""Minimal LangGraph-style wrapper for the W3A builder CLI.
+"""Minimal LangGraph-style wrapper for the WA3 builder CLI.
 
 This file is an integration sketch, not a required runtime dependency. Keep the
-security decision boundary in the W3A CLI or a deterministic equivalent.
+security decision boundary in the WA3 CLI or a deterministic equivalent.
 """
 
 from __future__ import annotations
@@ -12,12 +12,12 @@ from pathlib import Path
 from typing import Any
 
 
-def run_w3a_build(package_root: str, answers_path: str, out_path: str) -> dict[str, Any]:
+def run_wa3_build(package_root: str, answers_path: str, out_path: str) -> dict[str, Any]:
     root = Path(package_root)
     cmd = [
         "go",
         "run",
-        "./tools/w3a",
+        "./tools/wa3",
         "build",
         "--answers",
         str(Path(answers_path)),
@@ -39,10 +39,10 @@ def run_w3a_build(package_root: str, answers_path: str, out_path: str) -> dict[s
     }
 
 
-def run_w3a_trust(package_root: str, w3a_path: str) -> dict[str, Any]:
+def run_wa3_trust(package_root: str, wa3_path: str) -> dict[str, Any]:
     root = Path(package_root)
     proc = subprocess.run(
-        ["go", "run", "./tools/w3a", "trust", str(Path(w3a_path))],
+        ["go", "run", "./tools/wa3", "trust", str(Path(wa3_path))],
         cwd=root / "conformance",
         text=True,
         capture_output=True,

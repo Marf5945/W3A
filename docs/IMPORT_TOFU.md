@@ -1,13 +1,13 @@
-# W3A Import and TOFU Flow
+# WA3 Import and TOFU Flow
 
-This is the v1 fallback for a consumer who receives a W3A share link before a
+This is the v1 fallback for a consumer who receives a WA3 share link before a
 full provider adapter exists.
 
 ## Manual Import
 
-1. Download the `.w3a` bytes from the shared location. If the link is a rendered
+1. Download the `.tdy` bytes from the shared location. If the link is a rendered
    page, ask the publisher for a direct file handle or byte download.
-2. Run `w3a trust <file>` or the host Runtime's equivalent trust inspection.
+2. Run `wa3 trust <file>` or the host Runtime's equivalent trust inspection.
 3. If the result is `unsigned_draft`, treat it as a local preview only.
 4. If the result is `test_signed`, do not pin it and do not use it for
    production.
@@ -49,4 +49,4 @@ Use plain states:
 - Invalid: "The file signature does not match its contents."
 
 TOFU pin state belongs to the consumer Runtime trust store. It must not be
-written back into the `.w3a`.
+written back into the `.tdy`.

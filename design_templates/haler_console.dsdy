@@ -1,6 +1,6 @@
-# W3A Design Template: HaLer Console
+# WA3 Design Template: HaLer Console
 
-ㄊㄡ：W3A design-template v0.1
+ㄊㄡ：WA3 design-template v0.1
 ㄏㄠ：design.haler.console
 ㄉㄞ：1.0
 ㄏㄡ：design://local/haler_ai_console
@@ -9,11 +9,11 @@
 ㄝㄇㄜ：design_template
 ㄝㄕㄡ：haler_console
 ㄝㄌㄞ：【source】local HaLer AI Console v3.2 checkout, frontend/src/style.css【extracted】2026-06-28
-ㄝㄉㄧ：Extracted from HaLer AI Console v3.2 frontend source. Display guidance only; not an operable W3A contract and not part of the operable W3A canonical/signature trust profile.
+ㄝㄉㄧ：Extracted from HaLer AI Console v3.2 frontend source. Display guidance only; not an operable WA3 contract and not part of the operable WA3 canonical/signature trust profile.
 
 ## Purpose
 
-Use this template when a W3A renderer needs a dense, local-first agent console:
+Use this template when a WA3 renderer needs a dense, local-first agent console:
 left navigation/status rail, central conversation workspace, right tool/settings
 rail, compact message stream, inline confirmation cards, and a composer that can
 carry text, image, voice, stop, and send controls.
@@ -23,7 +23,7 @@ carry text, image, voice, stop, and send controls.
 - Do not copy backend targets, policies, mutation flags, provider state, or local
   filesystem paths into renderer behavior.
 - Do not execute source code from the referenced app.
-- Treat all action controls as visual affordances only until `w3a-core` confirms
+- Treat all action controls as visual affordances only until `wa3-core` confirms
   the verified action id and target.
 - Keep mutating-action confirmation visible even when the visual shell is compact.
 
@@ -46,7 +46,7 @@ carry text, image, voice, stop, and send controls.
     },
     {
       "id": "main_workspace",
-      "role": "conversation_or_primary_w3a_block",
+      "role": "conversation_or_primary_wa3_block",
       "width": "minmax(580px, 1fr)",
       "content": ["system_strip", "review_strip", "message_list", "composer"]
     },
@@ -155,7 +155,7 @@ carry text, image, voice, stop, and send controls.
   },
   "action_role_slots": {
     "primary_submit": {
-      "match": "verified W3A action that submits the current composer/form or starts the main user-confirmed flow",
+      "match": "verified WA3 action that submits the current composer/form or starts the main user-confirmed flow",
       "component": "composer.send_button",
       "style": "compact magenta gradient button inside or beside the input; icon-forward, high contrast, fixed size",
       "fallback": "derive a same-size high-emphasis composer button from the send color token; do not create a feature"
@@ -179,13 +179,13 @@ carry text, image, voice, stop, and send controls.
       "match": "verified destructive, irreversible, or high-risk mutating action that already requires confirmation",
       "component": "inline_review_card action area",
       "style": "amber confirmation surface with danger accent on the final button",
-      "notes": "visual treatment only; confirmation and target still come from w3a-core"
+      "notes": "visual treatment only; confirmation and target still come from wa3-core"
     }
   }
 }
 ```
 
-## W3A Block Mapping
+## WA3 Block Mapping
 
 ```json
 {

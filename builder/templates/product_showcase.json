@@ -3,9 +3,9 @@
   "template_version": "1.0.0",
   "display_name": "Product showcase",
   "recommended_design_templates": [
-    {"handle": "modern_industrial_glass_site", "file": "modern_industrial_glass_ds.w3a", "reason": "Best fit for website-style product pages with hero, metrics, timeline, and resource cards."},
-    {"handle": "mobile_holographic_hmi_app", "file": "mobile_holographic_hmi_ds.w3a", "reason": "Mobile-first fallback for product cards and resource flows."},
-    {"handle": "terminal_tactical_hud", "file": "terminal_tactical_ds.w3a", "reason": "Dense technical fallback for status-heavy product showcases."}
+    {"handle": "modern_industrial_glass_site", "file": "modern_industrial_glass.dsdy", "reason": "Best fit for website-style product pages with hero, metrics, timeline, and resource cards."},
+    {"handle": "mobile_holographic_hmi_app", "file": "mobile_holographic_hmi.dsdy", "reason": "Mobile-first fallback for product cards and resource flows."},
+    {"handle": "terminal_tactical_hud", "file": "terminal_tactical.dsdy", "reason": "Dense technical fallback for status-heavy product showcases."}
   ],
   "default_app": {
     "id": "com.example.product_showcase",

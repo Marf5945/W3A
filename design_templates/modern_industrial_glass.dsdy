@@ -1,6 +1,6 @@
-# W3A Design Template: Modern Industrial Glass Site
+# WA3 Design Template: Modern Industrial Glass Site
 
-ㄊㄡ：W3A design-template v0.1
+ㄊㄡ：WA3 design-template v0.1
 ㄏㄠ：design.modern.industrial_glass_site
 ㄉㄞ：0.1
 ㄏㄡ：design://local/kronos-preview
@@ -9,11 +9,11 @@
 ㄝㄇㄜ：design_template
 ㄝㄕㄡ：modern_industrial_glass_site
 ㄝㄌㄞ：【source】kronos-preview.html【extracted】2026-06-28
-ㄝㄉㄧ：Display guidance only; not an operable W3A contract and not part of the operable W3A canonical/signature trust profile.
+ㄝㄉㄧ：Display guidance only; not an operable WA3 contract and not part of the operable WA3 canonical/signature trust profile.
 
 ## Purpose
 
-Use this template when a W3A renderer needs a polished modern website with a
+Use this template when a WA3 renderer needs a polished modern website with a
 clear industrial theme: cold metallic palette, frosted glass content cards,
 simple sticky navigation, spacious product/solution sections, clean metrics,
 timeline storytelling, resource/download cards, and corporate modal forms.
@@ -25,10 +25,10 @@ timeline storytelling, resource/download cards, and corporate modal forms.
   action ids, true button labels, source asset references, fonts, visual
   identity assets, or executable implementation files.
 - Treat words such as "secure", "certified", "audited", and "encrypted" as
-  design tone unless a verified W3A contract/runtime state says otherwise.
+  design tone unless a verified WA3 contract/runtime state says otherwise.
 - Abstract placeholders are allowed when they cannot operate.
-- Every real interaction must map back to a verified operable W3A contract and
-  pass through `w3a-core`.
+- Every real interaction must map back to a verified operable WA3 contract and
+  pass through `wa3-core`.
 
 ## Layout Profile
 
@@ -209,7 +209,7 @@ timeline storytelling, resource/download cards, and corporate modal forms.
   "corporate_modal": {
     "shape": "centered dark modal on blurred scrim; square borders; header row; labeled form controls",
     "success": "inline dark success panel with accent icon/label",
-    "notes": "modal cannot bypass W3A confirmation or permission state"
+    "notes": "modal cannot bypass WA3 confirmation or permission state"
   },
   "toast": {
     "shape": "bottom-right dark metal toast with accent border and short mono heading",
@@ -217,7 +217,7 @@ timeline storytelling, resource/download cards, and corporate modal forms.
   },
   "action_role_slots": {
     "primary_submit": {
-      "match": "verified W3A action that submits a form, starts the main offer flow, or performs the primary page action",
+      "match": "verified WA3 action that submits a form, starts the main offer flow, or performs the primary page action",
       "component": "primary_cta or corporate_modal primary button",
       "style": "square filled cold-blue or metallic accent button with clear text, strong focus border, and stable height",
       "fallback": "derive a same-style filled CTA from accent, text, and control spacing tokens; do not create a feature"
@@ -241,13 +241,13 @@ timeline storytelling, resource/download cards, and corporate modal forms.
       "match": "verified destructive, irreversible, or high-risk mutating action that already requires confirmation",
       "component": "corporate_modal confirmation action",
       "style": "square danger-tinted outline/fill inside a dark modal with target summary",
-      "notes": "visual treatment only; confirmation and target still come from w3a-core"
+      "notes": "visual treatment only; confirmation and target still come from wa3-core"
     }
   }
 }
 ```
 
-## W3A Block Mapping
+## WA3 Block Mapping
 
 ```json
 {
@@ -276,7 +276,7 @@ timeline storytelling, resource/download cards, and corporate modal forms.
 - Use local/runtime-provided icons. If no icon set exists, use text initials or
   simple CSS shapes.
 - Optional CAD/chart motion must be disabled under reduced motion.
-- Mutating actions use W3A confirmation rules regardless of how clean the CTA
+- Mutating actions use WA3 confirmation rules regardless of how clean the CTA
   appears.
 
 ## Source Notes

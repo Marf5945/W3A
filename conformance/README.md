@@ -1,4 +1,4 @@
-# W3A Conformance Kit (v0)
+# WA3 Conformance Kit (v0)
 
 Minimal Go reference + golden vectors that pin cross-language behaviour for the
 parts most likely to diverge. The conformance tool is Go-native and uses the
@@ -6,7 +6,7 @@ repository's Go module dependencies.
 
 ## What's here
 
-- `tools/w3a/main.go` — Go-native reference: encoding normalization (§6A),
+- `tools/wa3/main.go` — Go-native reference: encoding normalization (§6A),
   version `ㄉㄞ` parsing (§30.1 / 附錄 A.3), `ㄝ` namespace classification
   (§3.4), stable error codes (§30.4), nested canonical serializer (§8 / §8.1),
   RL/KR canonical (§27.6), Ed25519 signature vectors, and bundle checks.
@@ -31,42 +31,42 @@ go mod download   # or: go mod tidy
 ## Run
 
 ```sh
-go run ./tools/w3a gen-vectors       # regenerate vectors/
-go run ./tools/w3a canonical some.w3a # print canonical bytes, sha256 on stderr
-go run ./tools/w3a build --answers ../builder/examples/board.answers.json --out /tmp/board.draft.w3a --mock-demo /tmp/board.mock-demo.json
-go run ./tools/w3a build --answers ../builder/examples/board.answers.json --out /tmp/board.test-signed.w3a --test-sign
-go run ./tools/w3a keygen --publisher com.demo.publisher --key-out /tmp/w3a-demo-key.json
-go run ./tools/w3a sign --key-file /tmp/w3a-demo-key.json --in /tmp/board.draft.w3a --out /tmp/board.production.w3a
-go run ./tools/w3a trust /tmp/board.test-signed.w3a
-go run ./tools/w3a trust --rl /tmp/list.w3a-rl /tmp/board.test-signed.w3a  # re-check §27 revocation list
-go run ./tools/w3a bundle-check       # validate bundle + vectors
+go run ./tools/wa3 gen-vectors       # regenerate vectors/
+go run ./tools/wa3 canonical some.tdy # print canonical bytes, sha256 on stderr
+go run ./tools/wa3 build --answers ../builder/examples/board.answers.json --out /tmp/board.draft.tdy --mock-demo /tmp/board.mock-demo.json
+go run ./tools/wa3 build --answers ../builder/examples/board.answers.json --out /tmp/board.test-signed.tdy --test-sign
+go run ./tools/wa3 keygen --publisher com.demo.publisher --key-out /tmp/wa3-demo-key.json
+go run ./tools/wa3 sign --key-file /tmp/wa3-demo-key.json --in /tmp/board.draft.tdy --out /tmp/board.production.tdy
+go run ./tools/wa3 trust /tmp/board.test-signed.tdy
+go run ./tools/wa3 trust --rl /tmp/list.tdy-rl /tmp/board.test-signed.tdy  # re-check §27 revocation list
+go run ./tools/wa3 bundle-check       # validate bundle + vectors
 ```
 
 When you compile the CLI, build outside the repo so the binary never lands in
 the scanned tree:
 
 ```sh
-go build -o /tmp/w3a ./tools/w3a      # NOT: go build ./tools/w3a
+go build -o /tmp/wa3 ./tools/wa3      # NOT: go build ./tools/wa3
 ```
 
-`bundle-check` skips compiled build artifacts (the `w3a` binary, `*.test`,
+`bundle-check` skips compiled build artifacts (the `wa3` binary, `*.test`,
 `*.exe`, `*.o`, `*.out`) and these are `.gitignore`d, so they never enter the
 published bundle. Every authored source file is still scanned.
 
-CI should run `go run ./tools/w3a bundle-check`. To update golden vectors after
-an intentional canonical change, run `go run ./tools/w3a gen-vectors` and review
+CI should run `go run ./tools/wa3 bundle-check`. To update golden vectors after
+an intentional canonical change, run `go run ./tools/wa3 gen-vectors` and review
 the vector diff.
 
 `build` is the builder v1 demo path. It treats LLM output as untrusted, validates
 the answers file, rejects token-shaped secrets, enforces template-owned
 `risk_class` and confirmation rules, canonicalizes the generated contract, and
-only writes the `.w3a` when every gate passes. `--test-sign` uses the deterministic
+only writes the `.tdy` when every gate passes. `--test-sign` uses the deterministic
 TEST ONLY key; formal runtimes must reject it as `E-TRUST-TESTKEY`.
 
 `keygen` and `sign` are the advanced local production-signing path. `keygen`
-refuses to write private key files inside the W3A_SPEC repository; keep the key
+refuses to write private key files inside the WA3_SPEC repository; keep the key
 file outside the repo or in a host credential store wrapper. `sign` reuses the
-same canonical serializer as `trust` and writes a production-signed `.w3a`.
+same canonical serializer as `trust` and writes a production-signed `.tdy`.
 
 ## Scope (v0)
 
@@ -83,7 +83,7 @@ This v0 pins the byte-level behaviours needed before runtimes can interoperate:
 
 ## Pinned decisions
 
-`tools/w3a` pins a few byte-level decisions so other implementations can match
+`tools/wa3` pins a few byte-level decisions so other implementations can match
 the golden vectors exactly:
 
 - **Canonical separator/spacing.** §8 confirms the canonical line form is

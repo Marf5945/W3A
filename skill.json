@@ -1,9 +1,9 @@
 {
-  "schema": "https://w3a.dev/schemas/portable-skill-bundle-v0.json",
-  "name": "w3a-spec",
-  "display_name": "W3A Spec",
+  "schema": "https://wa3.dev/schemas/portable-skill-bundle-v0.json",
+  "name": "wa3-spec",
+  "display_name": "WA3 Spec",
   "version": "0.3.0-draft",
-  "description": "Portable W3A skill-contract specification bundle for agents and runtimes that need to read, validate, compile, render, or evolve .w3a contracts.",
+  "description": "Portable WA3 skill-contract specification bundle for agents and runtimes that need to read, validate, compile, render, or evolve .tdy contracts.",
   "license": "see-repository",
   "entrypoints": {
     "root_skill": "SKILL.md",
@@ -14,8 +14,8 @@
     "publish_checklist": "docs/PUBLISH_CHECKLIST.md",
     "import_tofu": "docs/IMPORT_TOFU.md",
     "render_pipeline": "docs/RENDER_PIPELINE.md",
-    "spec": "W3A-SPEC.md",
-    "example": "board.w3a",
+    "spec": "WA3-SPEC.md",
+    "example": "board.tdy",
     "builder_schema": "builder/answers.schema.json",
     "builder_template_catalog": "builder/templates/catalog.json",
     "builder_example": "builder/examples/board.answers.json",
@@ -26,7 +26,7 @@
     "conformance": "conformance/README.md"
   },
   "adapters": {
-    "codex": "skills/w3a-spec/SKILL.md",
+    "codex": "skills/wa3-spec/SKILL.md",
     "haler": "adapters/haler/haler.skill.json",
     "claude_code": "adapters/claude-code/CLAUDE.md",
     "openhands": "adapters/openhands/README.md",
@@ -40,9 +40,9 @@
     "claude_code_marketplace": ".claude-plugin/marketplace.json"
   },
   "capabilities": [
-    "review_w3a_contract",
-    "author_w3a_contract",
-    "build_w3a_from_answers",
+    "review_wa3_contract",
+    "author_wa3_contract",
+    "build_wa3_from_answers",
     "extract_interface_contract",
     "extract_design_template",
     "bind_design_and_render",
@@ -73,7 +73,7 @@
     "vectors": "conformance/vectors",
     "archive": "archive",
     "codex_root_skill": "SKILL.md",
-    "codex_skill": "skills/w3a-spec",
+    "codex_skill": "skills/wa3-spec",
     "openhands_plugin": ".plugin/plugin.json",
     "openhands_setup": ".openhands/setup.sh",
     "openhands_hooks": ".openhands/hooks.json",

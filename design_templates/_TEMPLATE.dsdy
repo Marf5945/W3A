@@ -1,6 +1,6 @@
-# W3A Design Template: <Template Name>
+# WA3 Design Template: <Template Name>
 
-ㄊㄡ：W3A design-template v0.1
+ㄊㄡ：WA3 design-template v0.1
 ㄏㄠ：design.<family>.<name>
 ㄉㄞ：0.1
 ㄏㄡ：design://local/<source-handle>
@@ -9,7 +9,7 @@
 ㄝㄇㄜ：design_template
 ㄝㄕㄡ：<short_template_handle>
 ㄝㄌㄞ：【source】<durable source path or durable reference>【extracted】YYYY-MM-DD
-ㄝㄉㄧ：Display guidance only; not an operable W3A contract and not part of the operable W3A canonical/signature trust profile.
+ㄝㄉㄧ：Display guidance only; not an operable WA3 contract and not part of the operable WA3 canonical/signature trust profile.
 
 ## Purpose
 
@@ -23,8 +23,8 @@ copy product copy, campaign language, or user data from the source.
   action ids, true button labels, source asset references, fonts, visual
   identity assets, or executable implementation files.
 - Abstract placeholders are allowed when they cannot operate.
-- Every real interaction must map back to a verified operable W3A contract and
-  pass through `w3a-core`.
+- Every real interaction must map back to a verified operable WA3 contract and
+  pass through `wa3-core`.
 
 ## Layout Profile
 
@@ -87,7 +87,7 @@ copy product copy, campaign language, or user data from the source.
   },
   "action_role_slots": {
     "primary_submit": {
-      "match": "verified W3A action that writes/submits or starts the main user-confirmed flow",
+      "match": "verified WA3 action that writes/submits or starts the main user-confirmed flow",
       "component": "<abstract_button_role>",
       "fallback": "derive a same-style primary control if this exact role is missing; do not create a feature"
     },
@@ -98,23 +98,23 @@ copy product copy, campaign language, or user data from the source.
     "compact_icon_action": {
       "match": "verified row, card, toolbar, or repeated control that should stay compact",
       "component": "<abstract_button_role>",
-      "notes": "icon or short-label treatment only; the UI plan still binds the verified W3A action"
+      "notes": "icon or short-label treatment only; the UI plan still binds the verified WA3 action"
     },
     "destructive_confirm": {
       "match": "verified destructive or irreversible action that already requires confirmation",
       "component": "<abstract_button_role>",
-      "notes": "visual danger treatment only; W3A confirmation still comes from w3a-core"
+      "notes": "visual danger treatment only; WA3 confirmation still comes from wa3-core"
     },
     "navigation_or_filter": {
       "match": "display navigation, search, filter, or tab control",
       "component": "<abstract_button_role>",
-      "notes": "display-only unless bound to a verified W3A action in the UI plan"
+      "notes": "display-only unless bound to a verified WA3 action in the UI plan"
     }
   }
 }
 ```
 
-## W3A Block Mapping
+## WA3 Block Mapping
 
 ```json
 {
@@ -131,10 +131,10 @@ copy product copy, campaign language, or user data from the source.
 
 - Prefer stable dimensions for repeated controls and status elements.
 - Keep focus states visible without implying trust or permission state.
-- Keep mutating-operation confirmation visible when the verified W3A contract
+- Keep mutating-operation confirmation visible when the verified WA3 contract
   requires it.
 - Use placeholders such as `<declared_action_slot>` only for abstract mapping.
-- Every rendered button must either bind to a verified W3A action in the UI plan
+- Every rendered button must either bind to a verified WA3 action in the UI plan
   or be marked display-navigation/display-only. If the template lacks a matching
   role, derive a fallback from the template's tokens and record it as styling,
   not as a new feature.

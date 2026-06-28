@@ -1,6 +1,6 @@
-ㄊㄡ：W3A v0.2
+ㄊㄡ：WA3 v0.3
 ㄏㄠ：com.example.board
-ㄉㄞ：1
+ㄉㄞ：1.0
 ㄏㄡ：gdrive://BOARD_FILE_ID
 ㄈㄢ：shared
 
@@ -51,8 +51,6 @@
   ㄊㄞ：ㄗㄞ｜ㄇㄢ
 
 ㄕㄜ
-ㄋㄛ：submit_message｜react
-ㄘㄤ：submit_message｜react｜search_messages
 ㄙㄜ：ㄍㄟ｜ㄋㄠ｜ㄕㄞ
 ㄗ：1｜2
 ㄉㄥ：compact｜comfortable

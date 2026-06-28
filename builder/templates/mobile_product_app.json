@@ -3,9 +3,9 @@
   "template_version": "1.0.0",
   "display_name": "Mobile product app",
   "recommended_design_templates": [
-    {"handle": "mobile_holographic_hmi_app", "file": "mobile_holographic_hmi_ds.w3a", "reason": "Best fit for bottom-tab mobile app shells, HMI modals, compact cards, and toast layers."},
-    {"handle": "modern_industrial_glass_site", "file": "modern_industrial_glass_ds.w3a", "reason": "Good fallback when the app should render as a public product site."},
-    {"handle": "terminal_tactical_hud", "file": "terminal_tactical_ds.w3a", "reason": "Good fallback for technical operator dashboards and resource vaults."}
+    {"handle": "mobile_holographic_hmi_app", "file": "mobile_holographic_hmi.dsdy", "reason": "Best fit for bottom-tab mobile app shells, HMI modals, compact cards, and toast layers."},
+    {"handle": "modern_industrial_glass_site", "file": "modern_industrial_glass.dsdy", "reason": "Good fallback when the app should render as a public product site."},
+    {"handle": "terminal_tactical_hud", "file": "terminal_tactical.dsdy", "reason": "Good fallback for technical operator dashboards and resource vaults."}
   ],
   "default_app": {
     "id": "com.example.mobile_product_app",

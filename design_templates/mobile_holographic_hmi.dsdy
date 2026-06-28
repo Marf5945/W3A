@@ -1,6 +1,6 @@
-# W3A Design Template: Mobile Holographic HMI App
+# WA3 Design Template: Mobile Holographic HMI App
 
-ㄊㄡ：W3A design-template v0.1
+ㄊㄡ：WA3 design-template v0.1
 ㄏㄠ：design.mobile.holographic_hmi_app
 ㄉㄞ：0.1
 ㄏㄡ：design://local/pasted-mobile-holographic-hmi
@@ -9,11 +9,11 @@
 ㄝㄇㄜ：design_template
 ㄝㄕㄡ：mobile_holographic_hmi_app
 ㄝㄌㄞ：【source】user-provided pasted HTML attachment, future-tech mobile app preview【extracted】2026-06-28
-ㄝㄉㄧ：Display guidance only; not an operable W3A contract and not part of the operable W3A canonical/signature trust profile.
+ㄝㄉㄧ：Display guidance only; not an operable WA3 contract and not part of the operable WA3 canonical/signature trust profile.
 
 ## Purpose
 
-Use this template when a W3A renderer needs a compact mobile-first app shell
+Use this template when a WA3 renderer needs a compact mobile-first app shell
 with a premium future-tech HMI mood: simulated device viewport, glowing nebula
 background, frosted quartz cards, bottom tab navigation, metric/story/resource
 pages, holographic modal confirmations, progress affordances, and short
@@ -26,13 +26,13 @@ nonblocking toast feedback.
   action ids, true button labels, source asset references, fonts, visual
   identity assets, or executable implementation files.
 - Treat words such as "secure", "encrypted", "biometric", "vault", and
-  "verified" as visual tone unless a verified W3A contract/runtime state says
+  "verified" as visual tone unless a verified WA3 contract/runtime state says
   otherwise.
 - Long-press, scan, fingerprint, call, mail, download, and transmission motifs
   are interaction shapes only. They must not imply authentication, delivery,
   local storage, network transfer, or permission state.
-- Every real interaction must map back to a verified operable W3A contract and
-  pass through `w3a-core`.
+- Every real interaction must map back to a verified operable WA3 contract and
+  pass through `wa3-core`.
 
 ## Layout Profile
 
@@ -174,7 +174,7 @@ nonblocking toast feedback.
   },
   "carousel_dots": {
     "shape": "tiny pill indicators; active item expands horizontally",
-    "behavior": "switches display-only page/item state unless wired to a declared W3A action"
+    "behavior": "switches display-only page/item state unless wired to a declared WA3 action"
   },
   "metric_card": {
     "shape": "glass card with label, large numeric value, icon cell, and tiny legend row",
@@ -200,7 +200,7 @@ nonblocking toast feedback.
   "hmi_modal": {
     "shape": "centered dark glass panel over blurred scrim with cyan border glow, corner brackets, and optional scanline",
     "use_for": ["confirmation", "contact", "detail", "form"],
-    "notes": "modal cannot replace W3A confirmation, permission checks, or trust state"
+    "notes": "modal cannot replace WA3 confirmation, permission checks, or trust state"
   },
   "hmi_form_control": {
     "shape": "dark compact input with mono uppercase label, soft border, cyan focus ring, and small text",
@@ -217,7 +217,7 @@ nonblocking toast feedback.
   },
   "action_role_slots": {
     "primary_submit": {
-      "match": "verified W3A action that submits the current modal/form or starts the main mobile flow",
+      "match": "verified WA3 action that submits the current modal/form or starts the main mobile flow",
       "component": "hmi_modal primary button or long_press_progress_control",
       "style": "small cyan glass button or circular progress button with neon-cyan border, compact label, and fixed height",
       "fallback": "derive a cyan glass primary control from neon_cyan, surface_dark, and control radius tokens; do not create a feature"
@@ -241,13 +241,13 @@ nonblocking toast feedback.
       "match": "verified destructive, irreversible, or high-risk mutating action that already requires confirmation",
       "component": "hmi_modal confirmation button or long_press_progress_control",
       "style": "cyan HMI confirmation surface with visible target summary; optional hold progress is extra visual friction",
-      "notes": "visual treatment only; confirmation and target still come from w3a-core"
+      "notes": "visual treatment only; confirmation and target still come from wa3-core"
     }
   }
 }
 ```
 
-## W3A Block Mapping
+## WA3 Block Mapping
 
 ```json
 {
@@ -266,11 +266,11 @@ nonblocking toast feedback.
   labels, icons, counters, and progress rings do not resize the layout.
 - Use bottom tabs for major modes and card/row interactions for local
   navigation. A tab switch is display navigation unless bound to a verified
-  W3A action.
+  WA3 action.
 - Prefer icons from the host renderer's allowed icon system. If none exists,
   use initials or simple CSS shapes instead of copying icon fonts.
 - Place mutating-operation confirmation in the HMI modal or long-press control
-  only as an additional visual affordance; `w3a-core` still owns confirmation.
+  only as an additional visual affordance; `wa3-core` still owns confirmation.
 - Keep secure/biometric/download/call/mail wording generic unless the verified
   contract supplies the actual action and runtime trust state.
 - Disable nebula movement, scanlines, particles, floating cards, animated

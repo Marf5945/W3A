@@ -1,13 +1,13 @@
 {
-  "name": "build_w3a_draft",
-  "description": "Send guided answers to a trusted W3A builder backend and return build/trust status.",
+  "name": "build_wa3_draft",
+  "description": "Send guided answers to a trusted WA3 builder backend and return build/trust status.",
   "input_schema": {
     "type": "object",
     "required": ["answers"],
     "properties": {
       "answers": {
         "type": "object",
-        "description": "W3A builder answers matching builder/answers.schema.json."
+        "description": "WA3 builder answers matching builder/answers.schema.json."
       }
     }
   },

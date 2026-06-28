@@ -1,17 +1,17 @@
 {
-  "name": "w3a",
+  "name": "wa3",
   "owner": {
-    "name": "W3A Project"
+    "name": "WA3 Project"
   },
   "metadata": {
-    "description": "W3A skill-contract bundle marketplace.",
+    "description": "WA3 skill-contract bundle marketplace.",
     "version": "0.3.0-draft"
   },
   "plugins": [
     {
-      "name": "w3a-spec",
+      "name": "wa3-spec",
       "source": "./",
-      "description": "Review, author, build, canonicalize, and verify signed .w3a agent-skill contracts. Includes the authoritative spec, builder schema/templates, and Go conformance kit."
+      "description": "Review, author, build, canonicalize, and verify signed .tdy agent-skill contracts. Includes the authoritative spec, builder schema/templates, and Go conformance kit."
     }
   ]
 }

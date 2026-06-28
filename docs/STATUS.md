@@ -1,7 +1,7 @@
-# W3A Bundle — Status
+# WA3 Bundle — Status
 
-Single authoritative spec: `W3A-SPEC.md` (§0–§31 + Appendix A). A byte-identical
-copy is mirrored at `skills/w3a-spec/references/W3A-SPEC.md` (enforced by
+Single authoritative spec: `WA3-SPEC.md` (§0–§31 + Appendix A). A byte-identical
+copy is mirrored at `skills/wa3-spec/references/WA3-SPEC.md` (enforced by
 `bundle-check`).
 
 ## Done
@@ -14,7 +14,7 @@ and error codes (§30); backward-compatibility rules and the `ㄝ` extension
 namespace (§31, §3.4); nested canonical ordering and normalization (§8.1);
 share-link provider allowlist (§23.4).
 
-**Conformance kit (Go-native).** `conformance/tools/w3a` implements encoding
+**Conformance kit (Go-native).** `conformance/tools/wa3` implements encoding
 normalization, version parsing, namespace classification, the nested canonical
 serializer, RL/KR canonical, stable error codes, golden-vector generation, and
 `bundle-check`. Ed25519 uses the Go standard library (`crypto/ed25519`).
@@ -30,8 +30,8 @@ and Hermes-style agents.
 
 **Builder v1 demo.** `builder/answers.schema.json`, the `board` / `task_list` /
 `feedback_form` / `product_showcase` / `mobile_product_app` templates, the
-functional template catalog, sample answers, reject fixtures, `w3a build`,
-`w3a keygen`, `w3a sign`, `w3a trust`, TEST ONLY signing, secret/risk gates,
+functional template catalog, sample answers, reject fixtures, `wa3 build`,
+`wa3 keygen`, `wa3 sign`, `wa3 trust`, TEST ONLY signing, secret/risk gates,
 `custom_generic` webpage-extraction answers, and mock-provider demo JSON are
 present.
 `bundle-check` exercises the happy path and the key reject cases.
@@ -50,15 +50,15 @@ Agents-Tools-MCP), not skill packages.
 
 Builder v1 is an authoring safety gate, not merely a file generator: it should
 let non-markdown users safely produce a parseable, canonicalizable, no-secret
-draft `.w3a`.
+draft `.tdy`.
 
-- Output: default `app.draft.w3a` + canonical hash. `app.test-signed.w3a` is
+- Output: default `app.draft.tdy` + canonical hash. `app.test-signed.tdy` is
   produced only with `--test-sign`.
 - Draft signature: include `ㄓㄤ` with publisher/public key if known; keep
   `ㄓㄥ：` blank. Runtime should report `E-TRUST-UNSIGNED` for blank signatures.
 - Test signing: TEST ONLY keys are permanently denied by formal runtimes
   (`E-TRUST-TESTKEY`) and exist only for vectors/demo.
-- Production promotion: do not convert `app.test-signed.w3a` into a formal file.
+- Production promotion: do not convert `app.test-signed.tdy` into a formal file.
   Reuse the same canonical structure and sign it again with a production
   publisher key handle; discard the test-signed artifact.
 - Publisher keys: v1 formal signing is CLI/advanced only (`keygen`, `sign`, and
@@ -96,9 +96,9 @@ draft `.w3a`.
   for `risk_class == low_mutate` with explicit human override, warning, and
   `confirm_disabled_by_user`; `high_mutate` and `irreversible` cannot disable
   confirmation.
-- Secret gate: answers JSON and `.w3a` must hard-error on token-shaped values
+- Secret gate: answers JSON and `.tdy` must hard-error on token-shaped values
   (`E-VALUE-SECRET`) and direct users to Runtime credential store.
-- Haler v1 CTA: primary "從模板建立 W3A"; secondary "檢查 W3A 檔案".
+- Haler v1 CTA: primary "從模板建立 WA3"; secondary "檢查 WA3 檔案".
 - Added user-flow docs: `EXTRACT_CONTRACT.md`, `PUBLISH_CHECKLIST.md`,
   `IMPORT_TOFU.md`, and `RENDER_PIPELINE.md`.
 
@@ -107,7 +107,7 @@ draft `.w3a`.
 ```sh
 cd conformance
 go mod download              # one-time: fetch golang.org/x/text
-go run ./tools/w3a bundle-check
+go run ./tools/wa3 bundle-check
 ```
 
 `bundle-check` validates: manifests parse, every manifest path exists, the spec
@@ -123,9 +123,9 @@ regeneration, and no stale markers remain.
 - Replace integration sketches with native manifests when LangGraph, Voiceflow,
   Mistral, or Eigent host-specific packaging requirements are finalized.
 - Claude Code plugin install — `.claude-plugin/plugin.json` and
-  `.claude-plugin/marketplace.json` are in place; the plugin root is `W3A_SPEC`
-  and the `skills/w3a-spec/` skill is auto-discovered. Install via
-  `/plugin marketplace add <owner/repo>` then `/plugin install w3a-spec@w3a`.
+  `.claude-plugin/marketplace.json` are in place; the plugin root is `WA3_SPEC`
+  and the `skills/wa3-spec/` skill is auto-discovered. Install via
+  `/plugin marketplace add <owner/repo>` then `/plugin install wa3-spec@wa3`.
 - OpenClaw / Hermes native manifests — pending each platform's official manifest
   schema; the generic markdown adapter is the fallback until then.
 - Haler installer manifest — `haler.skill.json` stays a projection of
@@ -153,7 +153,7 @@ regeneration, and no stale markers remain.
 
 ## Known gaps (deferred to v1.x)
 
-- Revocation freshness: `w3a trust --rl <file.w3a-rl>` is a structural membership
+- Revocation freshness: `wa3 trust --rl <file.tdy-rl>` is a structural membership
   pre-check only. Verifying the revocation list's own publisher signature per
   §27 before honoring its entries is not yet implemented.
 - Version re-review: when a publisher ships a new signed version of an app a

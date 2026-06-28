@@ -1,8 +1,8 @@
-# Install W3A Skill Into Agents
+# Install WA3 Skill Into Agents
 
 Use this playbook when a user says something like:
 
-> Install this W3A skill package into my agent and check whether it can run.
+> Install this WA3 skill package into my agent and check whether it can run.
 
 The package root is the parent directory of this `docs/` folder — it contains
 `SKILL.md`, `skill.json`, `builder/`, and `conformance/`. All bundle-relative
@@ -20,8 +20,8 @@ The installing agent should:
 5. Never copy user credentials, local paths, email, chat logs, or workspace
    private files into this package.
 6. Report four capabilities:
-   - can read and review `.w3a`
-   - can build a draft `.w3a`
+   - can read and review `.tdy`
+   - can build a draft `.tdy`
    - can classify trust state
    - can use a native install format
 
@@ -42,15 +42,15 @@ The installing agent should:
 Run from `conformance/`:
 
 ```sh
-go run ./tools/w3a bundle-check
-go run ./tools/w3a build --answers ../builder/examples/board.answers.json --out /tmp/w3a-board.draft.w3a --mock-demo /tmp/w3a-board.mock-demo.json
-go run ./tools/w3a trust /tmp/w3a-board.draft.w3a
+go run ./tools/wa3 bundle-check
+go run ./tools/wa3 build --answers ../builder/examples/board.answers.json --out /tmp/wa3-board.draft.tdy --mock-demo /tmp/wa3-board.mock-demo.json
+go run ./tools/wa3 trust /tmp/wa3-board.draft.tdy
 ```
 
 Expected:
 
 - `bundle check ok`
-- a draft `.w3a` is written
+- a draft `.tdy` is written
 - trust state is `unsigned_draft`
 
 ## If Shell Access Is Not Available
@@ -60,7 +60,7 @@ The agent should still load:
 1. `SKILL.md`
 2. `skill.json`
 3. `AGENTS.md`
-4. `W3A-SPEC.md`
+4. `WA3-SPEC.md`
 5. `builder/answers.schema.json`
 6. `builder/templates/`
 
@@ -71,7 +71,7 @@ Then it should clearly say that runtime commands were not executed.
 Before publishing or redistributing this package, run:
 
 ```sh
-go run ./conformance/tools/w3a bundle-check
+go run ./conformance/tools/wa3 bundle-check
 ```
 
 Also scan for personal data and credentials. The package must not contain

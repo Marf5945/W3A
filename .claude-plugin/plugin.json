@@ -1,13 +1,13 @@
 {
-  "name": "w3a-spec",
+  "name": "wa3-spec",
   "version": "0.3.0-draft",
-  "description": "Portable W3A skill-contract toolkit: review, author, build, canonicalize, and verify signed .w3a agent-skill contracts. Bundles the authoritative W3A specification, the builder answers schema and templates, and the Go conformance kit.",
+  "description": "Portable WA3 skill-contract toolkit: review, author, build, canonicalize, and verify signed .tdy agent-skill contracts. Bundles the authoritative WA3 specification, the builder answers schema and templates, and the Go conformance kit.",
   "author": {
-    "name": "W3A Project"
+    "name": "WA3 Project"
   },
   "license": "see-repository",
   "keywords": [
-    "w3a",
+    "wa3",
     "agent-skill-contract",
     "ed25519",
     "canonical-signature",

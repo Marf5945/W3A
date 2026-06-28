@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://w3a.dev/schemas/builder-answers-v1.json",
-  "title": "W3A Builder Answers v1",
+  "$id": "https://wa3.dev/schemas/builder-answers-v1.json",
+  "title": "WA3 Builder Answers v1",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -14,16 +14,16 @@
   "properties": {
     "answers_schema_version": {
       "const": "1.0",
-      "x-w3a-owner": "code_owned"
+      "x-wa3-owner": "code_owned"
     },
     "template_id": {
       "enum": ["board", "task_list", "feedback_form", "product_showcase", "mobile_product_app", "custom_generic"],
-      "x-w3a-owner": "human_only"
+      "x-wa3-owner": "human_only"
     },
     "template_version": {
       "type": "string",
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
-      "x-w3a-owner": "code_owned"
+      "x-wa3-owner": "code_owned"
     },
     "app": {
       "type": "object",
@@ -33,21 +33,21 @@
         "id": {
           "type": "string",
           "pattern": "^[a-z0-9]+(\\.[a-z0-9_-]+)+$",
-          "x-w3a-owner": "human_only"
+          "x-wa3-owner": "human_only"
         },
         "version": {
           "type": "string",
           "pattern": "^[0-9]+\\.[0-9]+$",
-          "x-w3a-owner": "human_only"
+          "x-wa3-owner": "human_only"
         },
         "backend": {
           "type": "string",
-          "x-w3a-owner": "human_only",
+          "x-wa3-owner": "human_only",
           "description": "Use a stable handle such as mock://board, gdrive://BOARD_FILE_ID, or api://provider/resource. Secrets are forbidden."
         },
         "scope": {
           "enum": ["local", "private", "shared"],
-          "x-w3a-owner": "human_only"
+          "x-wa3-owner": "human_only"
         }
       }
     },
@@ -59,17 +59,17 @@
         "id": {
           "type": "string",
           "pattern": "^[a-z0-9]+(\\.[a-z0-9_-]+)+$",
-          "x-w3a-owner": "human_only"
+          "x-wa3-owner": "human_only"
         },
         "public_key": {
           "type": "string",
-          "x-w3a-owner": "code_owned"
+          "x-wa3-owner": "code_owned"
         }
       }
     },
     "custom_template": {
       "type": "object",
-      "x-w3a-owner": "human_only",
+      "x-wa3-owner": "human_only",
       "description": "Required when template_id is custom_generic. Holds user-confirmed webpage extraction structure.",
       "additionalProperties": false,
       "required": ["template_id", "template_version", "display_name", "default_app", "entities", "actions", "blocks", "preferences"],
@@ -129,7 +129,7 @@
               "target": {"type": "string"},
               "mutates": {"type": "boolean"},
               "confirm": {"type": "boolean"},
-              "risk_class": {"enum": ["read", "low_mutate", "high_mutate", "irreversible"], "x-w3a-owner": "code_owned"},
+              "risk_class": {"enum": ["read", "low_mutate", "high_mutate", "irreversible"], "x-wa3-owner": "code_owned"},
               "purpose": {"type": "string"},
               "data_impact": {"type": "string"},
               "inputs": {
@@ -190,7 +190,7 @@
     },
     "llm_suggestions": {
       "type": "array",
-      "x-w3a-owner": "llm_suggestable",
+      "x-wa3-owner": "llm_suggestable",
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -204,7 +204,7 @@
     },
     "human_decisions": {
       "type": "array",
-      "x-w3a-owner": "human_only",
+      "x-wa3-owner": "human_only",
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -222,7 +222,7 @@
     },
     "opaque_confirmations": {
       "type": "array",
-      "x-w3a-owner": "human_only",
+      "x-wa3-owner": "human_only",
       "items": {
         "type": "object",
         "additionalProperties": false,
